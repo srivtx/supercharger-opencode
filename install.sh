@@ -20,11 +20,18 @@ set -uo pipefail
 
 REPO="srivtx/supercharger-opencode"
 BRANCH="${SUPERCHARGER_BRANCH:-main}"
-# Use jsDelivr as primary CDN (faster global, fresher cache). GitHub raw is
-# known to cache old versions for 5-30+ min after a push. codeload serves
-# tarballs from GitHub's own origin, so it's always current.
-RAW_URL="https://cdn.jsdelivr.net/gh/$REPO@$BRANCH"
+# Primary CDN: raw.githubusercontent.com (canonical GitHub).
+# Fallback: jsDelivr. GitHub's raw CDN is known to cache the previous
+# main-branch version for 5-30+ min after a push. If a manifest fetch
+# returns a version older than the minimum we know about, we retry
+# via jsDelivr before giving up.
+RAW_URL="https://raw.githubusercontent.com/$REPO/$BRANCH"
+FALLBACK_URL="https://cdn.jsdelivr.net/gh/$REPO@$BRANCH"
 ARCHIVE_URL="https://codeload.github.com/$REPO/tar.gz/$BRANCH"
+# Bump this when the manifest gains a new top-level field. The installer
+# uses it to detect a stale raw.githubusercontent.com cache and retry
+# from jsDelivr.
+MIN_MANIFEST_VERSION="2.1.0"
 INSTALL_DIR="${SUPERCHARGER_INSTALL_DIR:-$HOME/.config/opencode/skill}"
 
 die()   { printf 'error: %s\n' "$*" >&2; exit 1; }
@@ -54,8 +61,28 @@ fetch_with_retry() {
 fetch_manifest() {
   local dest
   dest=$(mktemp)
-  fetch_with_retry "$RAW_URL/manifest.json" "$dest" \
-    || die "could not fetch manifest from $RAW_URL/manifest.json"
+
+  # Try primary CDN (raw.githubusercontent.com).
+  if fetch_with_retry "$RAW_URL/manifest.json" "$dest"; then
+    # If the raw CDN is serving a stale version (older than the minimum we
+    # know about), the fetch will succeed but the install will be missing
+    # features. Detect that and fall through to the fallback.
+    if jq -e --arg min "$MIN_MANIFEST_VERSION" '
+        .version and (.version | split(".") | map(tonumber)) as $v |
+        ($min  | split(".") | map(tonumber)) as $m |
+        $v[0] > $m[0] or ($v[0] == $m[0] and $v[1] > $m[1]) or
+        ($v[0] == $m[0] and $v[1] == $m[1] and ($v[2] // 0) >= ($m[2] // 0))
+      ' "$dest" >/dev/null 2>&1; then
+      echo "$dest"
+      return 0
+    fi
+    warn "raw.githubusercontent.com is serving a stale manifest (cache lag); falling back to jsDelivr"
+  fi
+
+  # Fallback: jsDelivr mirrors the same repo with more aggressive cache
+  # invalidation.
+  fetch_with_retry "$FALLBACK_URL/manifest.json" "$dest" \
+    || die "could not fetch manifest from $RAW_URL/manifest.json or $FALLBACK_URL/manifest.json"
   echo "$dest"
 }
 

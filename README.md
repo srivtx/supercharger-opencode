@@ -14,12 +14,16 @@
 The most popular entry point — the **design preset** — installs the full design category in one command:
 
 ```bash
-curl -fsSL https://cdn.jsdelivr.net/gh/srivtx/supercharger-opencode@main/install.sh | bash -s -- add design
+curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/install.sh | bash -s -- add design
 ```
 
 Restart opencode. Done.
 
-> **Why jsDelivr?** GitHub's `raw.githubusercontent.com` CDN is known to cache the previous main-branch version for 5–30+ minutes after a push. jsDelivr mirrors the same repo with a faster global CDN and more aggressive cache invalidation, so you always get the latest version immediately.
+> **Cache note:** GitHub's `raw.githubusercontent.com` CDN can cache the previous main-branch version for 5–30 minutes after a push. If you ever install and the new features (e.g. presets) are missing, the installer will automatically retry via jsDelivr. You can also force the fresh version with:
+>
+> ```bash
+> curl -fsSL https://cdn.jsdelivr.net/gh/srivtx/supercharger-opencode@main/install.sh | bash -s -- add design
+> ```
 
 ---
 
@@ -41,7 +45,7 @@ Don't know where to start? Pick a preset. Each one is a curated mix of skills or
 
 ```bash
 # Browse all presets with details
-curl -fsSL https://cdn.jsdelivr.net/gh/srivtx/supercharger-opencode@main/install.sh | bash -s -- presets
+curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/install.sh | bash -s -- presets
 
 # See what's in one preset
 curl -fsSL .../install.sh | bash -s -- info visual
