@@ -6,7 +6,7 @@
 #   curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/install.sh | bash -s -- add claude-design
 #   curl -fsSL .../install.sh | bash -s -- list
 #   curl -fsSL .../install.sh | bash -s -- info p5js
-#   curl -fsSL .../install.sh | bash -s -- remove claude-design
+#   curl -fsSL .../install.sh | bash -s -- remove --all  (uninstall everything)
 #
 # Or after git clone:
 #   ./install.sh add design
@@ -120,7 +120,42 @@ cmd_add() {
 }
 
 cmd_remove() {
-  [ $# -ge 1 ] || die "usage: remove <skill> [more ...]"
+  # remove [--all|-a] [<skill> ...]
+  local remove_all=0
+  while [ $# -gt 0 ]; do
+    case "$1" in
+      --all|-a) remove_all=1; shift ;;
+      *) break ;;
+    esac
+  done
+
+  if [ "$remove_all" -eq 1 ]; then
+    [ $# -eq 0 ] || die "--all cannot be combined with skill names"
+    have jq || die "missing required tool: jq (install: brew install jq / apt install jq)"
+    local manifest removed=0
+    manifest=$(fetch_manifest)
+    info "removing all supercharger-installed skills from $INSTALL_DIR"
+    local skills
+    skills=$(jq -r '.skills | keys[]' "$manifest")
+    for s in $skills; do
+      if [ -d "$INSTALL_DIR/$s" ]; then
+        info "- removing $s"
+        rm -rf "$INSTALL_DIR/$s"
+        removed=$((removed + 1))
+      fi
+    done
+    rm -f "$manifest"
+    echo
+    if [ "$removed" -eq 0 ]; then
+      ok "nothing to remove."
+    else
+      ok "removed $removed skill(s). restart opencode to unload."
+    fi
+    return
+  fi
+
+  [ $# -ge 1 ] || die "usage: remove [--all] <skill> [more ...]"
+
   for target in "$@"; do
     if [ ! -d "$INSTALL_DIR/$target" ]; then
       warn "skip: $target (not installed)"
@@ -209,7 +244,7 @@ USAGE
 
 COMMANDS
   add <skill|category> [...]   install one or more skills or whole categories
-  remove <skill> [...]         uninstall one or more skills
+  remove [--all] <skill> [...]  uninstall one, many, or all supercharger skills
   list                         show all available skills and their install status
   list-categories              show category summary
   info <skill>                 show details for one skill
@@ -220,7 +255,8 @@ EXAMPLES
   $0 add design                        # install all 5 design skills
   $0 add claude-design p5js humanizer  # install several at once
   $0 info p5js                         # what does p5js do?
-  $0 remove claude-design              # uninstall
+  $0 remove claude-design              # uninstall one
+  $0 remove --all                      # uninstall ALL supercharger skills
   $0 list                              # see everything
 
 CURL ONE-LINER

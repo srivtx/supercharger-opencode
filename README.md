@@ -37,6 +37,7 @@ cd supercharger-opencode
 
 # uninstall
 ./install.sh remove claude-design  # remove one
+./install.sh remove --all          # remove ALL supercharger skills at once
 ```
 
 The same commands work via curl too:
