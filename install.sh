@@ -380,6 +380,92 @@ cmd_presets() {
   rm -f "$manifest"
 }
 
+cmd_verify() {
+  # Verify every skill in $INSTALL_DIR has a valid SKILL.md that opencode
+  # will load. Reports installed count, broken skills, and what preset
+  # coverage the user has.
+  local manifest
+  manifest=$(fetch_manifest)
+
+  echo
+  info "install dir: $INSTALL_DIR"
+
+  if [ ! -d "$INSTALL_DIR" ]; then
+    warn "install directory does not exist; nothing to verify"
+    echo
+    info "install something first:  curl ... | bash -s -- add design"
+    rm -f "$manifest"
+    return
+  fi
+
+  local installed=0 broken=0 unknown=0
+  local broken_list="" unknown_list=""
+
+  for d in "$INSTALL_DIR"/*/; do
+    [ -d "$d" ] || continue
+    local skill
+    skill=$(basename "$d")
+
+    if [ ! -f "$d/SKILL.md" ]; then
+      broken=$((broken + 1))
+      broken_list+="$skill "
+      continue
+    fi
+
+    # Validate frontmatter: must have 'name:' and 'description:' at the top.
+    if ! head -20 "$d/SKILL.md" | grep -q "^name:" \
+       || ! head -20 "$d/SKILL.md" | grep -q "^description:"; then
+      broken=$((broken + 1))
+      broken_list+="$skill "
+      continue
+    fi
+
+    # Is it a known supercharger skill?
+    if jq -e --arg s "$skill" '.skills[$s]' "$manifest" >/dev/null 2>&1; then
+      installed=$((installed + 1))
+    else
+      unknown=$((unknown + 1))
+      unknown_list+="$skill "
+    fi
+  done
+
+  echo
+  printf '  \033[32m%d installed (valid)\033[0m\n' "$installed"
+  if [ "$broken" -gt 0 ]; then
+    printf '  \033[31m%d broken (missing SKILL.md or frontmatter)\033[0m\n' "$broken"
+    printf '    %s\n' "$broken_list"
+  fi
+  if [ "$unknown" -gt 0 ]; then
+    printf '  \033[33m%d unknown (not in this bundle)\033[0m\n' "$unknown"
+    printf '    %s\n' "$unknown_list"
+  fi
+
+  # Coverage against presets.
+  echo
+  info "preset coverage:"
+  jq -r '.presets | to_entries[] | "\(.key)\t\(.value.skills | length)"' "$manifest" \
+    | while IFS=$'\t' read -r key total; do
+        local have
+        have=$(jq -r --arg k "$key" '.presets[$k].skills[]' "$manifest" \
+               | while read -r s; do [ -d "$INSTALL_DIR/$s" ] && echo 1; done \
+               | wc -l | tr -d ' ')
+        printf '  %-14s %d / %d  ' "$key" "$have" "$total"
+        if [ "$have" -eq "$total" ]; then
+          printf '\033[32m✓ complete\033[0m\n'
+        elif [ "$have" -eq 0 ]; then
+          printf '\033[90m· not installed\033[0m\n'
+        else
+          printf '\033[33m~ partial\033[0m\n'
+        fi
+      done
+
+  echo
+  if [ "$broken" -eq 0 ] && [ "$installed" -gt 0 ]; then
+    ok "all $installed supercharger skill(s) look good. restart opencode to load."
+  fi
+  rm -f "$manifest"
+}
+
 cmd_help() {
   cat <<EOF
 supercharger-opencode installer
@@ -393,6 +479,7 @@ COMMANDS
   list                                show all available skills with install status
   list-categories                     show category summary
   presets                             show curated preset bundles
+  verify                              check installed skills are valid
   info <skill|category|preset>        show details for one target
   help                                show this message
 
@@ -405,6 +492,7 @@ EXAMPLES
   $0 presets                          # see all curated bundles
   $0 remove claude-design             # uninstall one
   $0 remove --all                     # uninstall ALL supercharger skills
+  $0 verify                           # check installed skills look good
   $0 list                             # see every skill
 
 CURL ONE-LINER
@@ -426,6 +514,7 @@ case "${1:-help}" in
   list|ls)          cmd_list ;;
   list-categories|ls-categories|categories|cats) cmd_list_categories ;;
   presets|preset|ps) cmd_presets ;;
+  verify|check|doctor) cmd_verify ;;
   info|show)        shift; cmd_info "$@" ;;
   help|--help|-h|"") cmd_help ;;
   *)                die "unknown command: $1 (try 'help')" ;;
