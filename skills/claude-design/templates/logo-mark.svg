@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
+  <!-- Editorial brand mark: a serif T with an extended crossbar.
+       The crossbar doubles as a horizon line / meeting line — fitting
+       for any "two parts joined" brand (matchmaker, mediator, partnership).
+       Drawn as a <path>, not <text>, so it renders identically without
+       a web font. Edit the coordinates below to tune proportions. -->
+
+  <!-- Vertical stem (centered) -->
+  <rect x="36" y="18" width="8" height="50" fill="#C84A2E"/>
+
+  <!-- Extended crossbar — goes well past the stem on both sides -->
+  <rect x="8" y="18" width="64" height="9" fill="#C84A2E"/>
+</svg>
