@@ -1,0 +1,121 @@
+{
+  "name": "supercharger-opencode",
+  "version": "1.0.0",
+  "repo": "https://github.com/srivtx/supercharger-opencode",
+  "branch": "main",
+  "default_install_dir": "~/.config/opencode/skill",
+  "categories": {
+    "design": {
+      "label": "Web & Product Design",
+      "description": "Design HTML artifacts, token specs, brand-style templates, quick mockups, and iteration loops.",
+      "skills": ["claude-design", "design-md", "popular-web-designs", "sketch", "visual-iteration-loop"]
+    },
+    "diagrams": {
+      "label": "Diagrams & Infographics",
+      "description": "Architecture diagrams, hand-drawn excalidraw, and 21x21 layout-style infographics.",
+      "skills": ["architecture-diagram", "excalidraw", "baoyu-infographic"]
+    },
+    "video": {
+      "label": "Video & Animation",
+      "description": "ASCII video, Manim 3Blue1Brown-style explainers, and TouchDesigner control.",
+      "skills": ["ascii-video", "manim-video", "touchdesigner-mcp"]
+    },
+    "creative-coding": {
+      "label": "Creative Coding",
+      "description": "p5.js sketches, kinetic typography, terminal ASCII art, and ComfyUI image gen.",
+      "skills": ["p5js", "pretext", "ascii-art", "comfyui"]
+    },
+    "writing-music": {
+      "label": "Writing & Music",
+      "description": "Strip AI-writing patterns, generate Suno music prompts.",
+      "skills": ["humanizer", "songwriting-and-ai-music"]
+    }
+  },
+  "skills": {
+    "claude-design": {
+      "category": "design",
+      "description": "One-off self-contained HTML artifacts (landing, deck, prototype) with verified browser output. CLI port of Anthropic's hosted Claude Design.",
+      "external_deps": ["browser"]
+    },
+    "design-md": {
+      "category": "design",
+      "description": "Author / lint / diff / export Google's DESIGN.md token-spec files.",
+      "external_deps": ["node", "npx @google/design.md"]
+    },
+    "popular-web-designs": {
+      "category": "design",
+      "description": "54 ready-to-paste design systems (Stripe, Linear, Vercel, Notion, Airbnb, etc.) for paste-ready HTML/CSS.",
+      "external_deps": ["google-fonts-cdn"]
+    },
+    "sketch": {
+      "category": "design",
+      "description": "2-3 disposable single-file HTML mockup variants for side-by-side design comparison.",
+      "external_deps": ["browser"]
+    },
+    "visual-iteration-loop": {
+      "category": "design",
+      "description": "Meta-skill for navigating multi-turn design iteration (Fix-vs-Look mode, declare-vs-ask).",
+      "external_deps": []
+    },
+    "architecture-diagram": {
+      "category": "diagrams",
+      "description": "Dark-themed inline-SVG cloud/infra architecture diagrams as one self-contained HTML file.",
+      "external_deps": ["google-fonts-cdn"]
+    },
+    "excalidraw": {
+      "category": "diagrams",
+      "description": "Hand-drawn .excalidraw JSON files (arch, flow, sequence, concept maps).",
+      "external_deps": ["cryptography-pip-optional"]
+    },
+    "baoyu-infographic": {
+      "category": "diagrams",
+      "description": "infographic.png from any of 21 layouts x 21 styles.",
+      "external_deps": ["image_generate-tool"]
+    },
+    "ascii-video": {
+      "category": "video",
+      "description": "Colored ASCII MP4/GIF (video-to-ASCII, audio-reactive, generative, hybrid, TTS).",
+      "external_deps": ["python", "numpy", "scipy", "pillow", "ffmpeg", "opencv-optional"]
+    },
+    "manim-video": {
+      "category": "video",
+      "description": "3Blue1Brown-style Manim CE explainer videos with optional voiceover.",
+      "external_deps": ["python", "manim-ce", "latex", "ffmpeg"]
+    },
+    "touchdesigner-mcp": {
+      "category": "video",
+      "description": "Drive a running TouchDesigner instance via the twozero MCP for real-time visuals.",
+      "external_deps": ["touchdesigner-commercial", "twozero-tox"]
+    },
+    "p5js": {
+      "category": "creative-coding",
+      "description": "Single-file HTML p5.js sketches (gen art, shaders, interactive, 3D, audio-reactive).",
+      "external_deps": ["p5js-cdn"]
+    },
+    "pretext": {
+      "category": "creative-coding",
+      "description": "Text-flow / reflow / kinetic typography demos with @chenglou/pretext.",
+      "external_deps": ["pretext-esm-cdn"]
+    },
+    "ascii-art": {
+      "category": "creative-coding",
+      "description": "Terminal ASCII art (pyfiglet, cowsay, boxes, toilet, image-to-ASCII, QR, weather).",
+      "external_deps": ["pyfiglet", "cowsay", "boxes", "toilet"]
+    },
+    "comfyui": {
+      "category": "creative-coding",
+      "description": "ComfyUI image generation control and node pipeline authoring.",
+      "external_deps": ["comfyui-server", "gpu", "comfy-cli"]
+    },
+    "humanizer": {
+      "category": "writing-music",
+      "description": "Rewrites text to strip 29 AI-writing patterns and add genuine voice.",
+      "external_deps": []
+    },
+    "songwriting-and-ai-music": {
+      "category": "writing-music",
+      "description": "Suno custom-mode packages (style description + metatagged lyrics) for original songs or parodies.",
+      "external_deps": ["suno-ai"]
+    }
+  }
+}
