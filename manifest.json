@@ -1,9 +1,65 @@
 {
   "name": "supercharger-opencode",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "repo": "https://github.com/srivtx/supercharger-opencode",
   "branch": "main",
   "default_install_dir": "~/.config/opencode/skill",
+  "presets": {
+    "minimal": {
+      "label": "Minimal Starter",
+      "tagline": "The 5 essentials every opencode dev should have.",
+      "description": "TDD, debugging, planning, and the two design skills that get the most pull requests merged: claude-design for mockups and pr-workflow for shipping them.",
+      "skills": ["test-driven-development", "systematic-debugging", "plan", "claude-design", "pr-workflow"]
+    },
+    "design": {
+      "label": "Design",
+      "tagline": "The full design category. HTML artifacts, token specs, brand templates, mockups.",
+      "description": "Everything in the design category: claude-design for self-contained HTML artifacts, design-md for token specs, popular-web-designs for 54 brand styles, sketch for quick variants, and visual-iteration-loop for handling multi-turn design feedback.",
+      "skills": ["claude-design", "design-md", "popular-web-designs", "sketch", "visual-iteration-loop"]
+    },
+    "visual": {
+      "label": "Visual Studio",
+      "tagline": "Design + diagrams + creative coding. Everything for visual-first work.",
+      "description": "The design category plus architecture diagrams, hand-drawn excalidraw, infographics, p5.js sketches, and pretext kinetic typography. For designers and frontend folks who need the full visual toolset.",
+      "skills": ["claude-design", "design-md", "popular-web-designs", "sketch", "visual-iteration-loop", "architecture-diagram", "excalidraw", "baoyu-infographic", "p5js", "pretext"]
+    },
+    "creative": {
+      "label": "Creative Bundle",
+      "tagline": "Every creative skill in the repo. Design, video, music, art.",
+      "description": "The full creative toolkit: design, diagrams, creative coding, video (ascii-video, manim-video, touchdesigner), ComfyUI image gen, and writing tools (humanizer, suno prompts). For content creators, designers, and anyone who makes things visually.",
+      "skills": ["claude-design", "design-md", "popular-web-designs", "sketch", "visual-iteration-loop", "architecture-diagram", "excalidraw", "baoyu-infographic", "p5js", "pretext", "ascii-art", "comfyui", "ascii-video", "manim-video", "touchdesigner-mcp", "humanizer", "songwriting-and-ai-music"]
+    },
+    "frontend": {
+      "label": "Frontend Developer",
+      "tagline": "Design + the dev workflow. For people who build UIs for a living.",
+      "description": "The visual preset plus the engineering and GitHub workflow: TDD, debugging, code review, PRs, code inspection. Built for frontend developers who want their opencode session to cover the full loop from mockup to merge.",
+      "skills": ["claude-design", "design-md", "popular-web-designs", "sketch", "visual-iteration-loop", "architecture-diagram", "excalidraw", "p5js", "test-driven-development", "systematic-debugging", "simplify-code", "plan", "spike", "skill-authoring", "requesting-code-review", "pr-workflow", "code-review", "issues", "codebase-inspection"]
+    },
+    "devops": {
+      "label": "DevOps & Platform",
+      "tagline": "GitHub, MCP, debugging, and multi-agent orchestration.",
+      "description": "For people who build the platform underneath: full GitHub workflow, Node debugging, Kanban multi-agent orchestration, and FastMCP / mcporter for building and calling MCP servers.",
+      "skills": ["pr-workflow", "code-review", "issues", "auth", "repo-management", "codebase-inspection", "plan", "spike", "systematic-debugging", "node-inspect-debugger", "kanban-orchestrator", "kanban-worker", "fastmcp", "mcporter"]
+    },
+    "researcher": {
+      "label": "Researcher",
+      "tagline": "Search arXiv, build wikis, monitor blogs, write papers.",
+      "description": "For researchers, students, and analysts. Search arXiv, build an LLM-powered wiki, monitor blogs and Polymarket, pull transcripts from YouTube, edit PDFs, and rewrite AI-flavored text into human voice.",
+      "skills": ["arxiv", "llm-wiki", "blogwatcher", "polymarket", "research-paper-writing", "nano-pdf", "ocr-and-documents", "youtube-content", "humanizer", "plan"]
+    },
+    "ml": {
+      "label": "ML Engineer",
+      "tagline": "HuggingFace, Jupyter, arXiv, Python debugging.",
+      "description": "For ML engineers. HuggingFace Hub CLI, Jupyter live kernel, arXiv search, Python debugging via debugpy, plus document and paper-writing tools.",
+      "skills": ["huggingface-hub", "fastmcp", "mcporter", "arxiv", "llm-wiki", "research-paper-writing", "jupyter-live-kernel", "plan", "test-driven-development", "nano-pdf", "ocr-and-documents", "python-debugpy"]
+    },
+    "pm": {
+      "label": "Product Manager",
+      "tagline": "Documents, Notion, PowerPoint, arXiv, OCR.",
+      "description": "For product managers. Document processing (PDFs, OCR, YouTube), Notion and PowerPoint for decks, Obsidian for notes, arXiv and blogwatcher for market signals, claude-design for quick mockups, and humanizer to clean up copy.",
+      "skills": ["nano-pdf", "ocr-and-documents", "youtube-content", "maps", "notion", "powerpoint", "obsidian", "arxiv", "blogwatcher", "claude-design", "humanizer", "google-workspace"]
+    }
+  },
   "categories": {
     "design": {
       "label": "Design",
