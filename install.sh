@@ -20,7 +20,10 @@ set -uo pipefail
 
 REPO="srivtx/supercharger-opencode"
 BRANCH="${SUPERCHARGER_BRANCH:-main}"
-RAW_URL="https://raw.githubusercontent.com/$REPO/$BRANCH"
+# Use jsDelivr as primary CDN (faster global, fresher cache). GitHub raw is
+# known to cache old versions for 5-30+ min after a push. codeload serves
+# tarballs from GitHub's own origin, so it's always current.
+RAW_URL="https://cdn.jsdelivr.net/gh/$REPO@$BRANCH"
 ARCHIVE_URL="https://codeload.github.com/$REPO/tar.gz/$BRANCH"
 INSTALL_DIR="${SUPERCHARGER_INSTALL_DIR:-$HOME/.config/opencode/skill}"
 
