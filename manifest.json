@@ -1,17 +1,17 @@
 {
   "name": "supercharger-opencode",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "repo": "https://github.com/srivtx/supercharger-opencode",
   "branch": "main",
   "default_install_dir": "~/.config/opencode/skill",
   "categories": {
     "design": {
-      "label": "Web & Product Design",
-      "description": "Design HTML artifacts, token specs, brand-style templates, quick mockups, and iteration loops.",
+      "label": "Design",
+      "description": "HTML artifacts, design-token specs, brand-style templates, quick mockups, and iteration loops.",
       "skills": ["claude-design", "design-md", "popular-web-designs", "sketch", "visual-iteration-loop"]
     },
     "diagrams": {
-      "label": "Diagrams & Infographics",
+      "label": "Diagrams",
       "description": "Architecture diagrams, hand-drawn excalidraw, and 21x21 layout-style infographics.",
       "skills": ["architecture-diagram", "excalidraw", "baoyu-infographic"]
     },
@@ -25,21 +25,126 @@
       "description": "p5.js sketches, kinetic typography, terminal ASCII art, and ComfyUI image gen.",
       "skills": ["p5js", "pretext", "ascii-art", "comfyui"]
     },
-    "writing-music": {
-      "label": "Writing & Music",
-      "description": "Strip AI-writing patterns, generate Suno music prompts.",
+    "writing": {
+      "label": "Writing",
+      "description": "Strip AI-writing patterns and generate Suno music prompts.",
       "skills": ["humanizer", "songwriting-and-ai-music"]
+    },
+    "engineering": {
+      "label": "Engineering",
+      "description": "TDD, debugging, code review, planning, and skill authoring. The day-to-day dev workflow.",
+      "skills": [
+        "test-driven-development",
+        "systematic-debugging",
+        "simplify-code",
+        "plan",
+        "spike",
+        "requesting-code-review",
+        "skill-authoring",
+        "node-inspect-debugger",
+        "python-debugpy",
+        "jupyter-live-kernel"
+      ]
+    },
+    "github": {
+      "label": "GitHub",
+      "description": "PRs, code review, issues, auth, repo management, and codebase inspection via gh CLI.",
+      "skills": [
+        "pr-workflow",
+        "code-review",
+        "issues",
+        "auth",
+        "repo-management",
+        "codebase-inspection"
+      ]
+    },
+    "agents": {
+      "label": "Agents",
+      "description": "Delegate to other coding CLIs (Claude Code, Codex, OpenCode) and orchestrate multi-agent workflows.",
+      "skills": [
+        "opencode",
+        "claude-code",
+        "codex",
+        "hermes-agent",
+        "kanban-orchestrator",
+        "kanban-worker"
+      ]
+    },
+    "research": {
+      "label": "Research",
+      "description": "Search arXiv, query Polymarket, monitor blogs, build wikis, and write papers.",
+      "skills": [
+        "arxiv",
+        "llm-wiki",
+        "blogwatcher",
+        "polymarket",
+        "research-paper-writing"
+      ]
+    },
+    "documents": {
+      "label": "Documents & Media",
+      "description": "Edit PDFs, OCR documents, summarize YouTube videos, look up maps.",
+      "skills": [
+        "nano-pdf",
+        "ocr-and-documents",
+        "youtube-content",
+        "maps"
+      ]
+    },
+    "productivity": {
+      "label": "Productivity",
+      "description": "Connect opencode to Notion, Airtable, Google Workspace, PowerPoint, Obsidian, email, and Teams.",
+      "skills": [
+        "notion",
+        "airtable",
+        "google-workspace",
+        "powerpoint",
+        "obsidian",
+        "himalaya",
+        "teams-pipeline"
+      ]
+    },
+    "data": {
+      "label": "Data & ML",
+      "description": "HuggingFace Hub, FastMCP server building, and mcporter MCP client.",
+      "skills": [
+        "huggingface-hub",
+        "fastmcp",
+        "mcporter"
+      ]
+    },
+    "crypto": {
+      "label": "Crypto",
+      "description": "Read-only EVM and Solana clients, plus Hyperliquid market data.",
+      "skills": [
+        "evm",
+        "solana",
+        "hyperliquid"
+      ]
+    },
+    "platform": {
+      "label": "Platform",
+      "description": "OS- or device-locked: macOS (Apple Notes/Reminders/iMessage/FindMy/computer-use), Hue lights, X/Twitter.",
+      "skills": [
+        "apple-notes",
+        "apple-reminders",
+        "findmy",
+        "imessage",
+        "macos-computer-use",
+        "openhue",
+        "xurl"
+      ]
     }
   },
   "skills": {
     "claude-design": {
       "category": "design",
-      "description": "One-off self-contained HTML artifacts (landing, deck, prototype) with verified browser output. CLI port of Anthropic's hosted Claude Design.",
+      "description": "One-off self-contained HTML artifacts (landing pages, decks, prototypes) with verified browser output. CLI port of Anthropic's hosted Claude Design.",
       "external_deps": ["browser"]
     },
     "design-md": {
       "category": "design",
-      "description": "Author / lint / diff / export Google's DESIGN.md token-spec files.",
+      "description": "Author, lint, diff, and export Google's DESIGN.md token-spec files.",
       "external_deps": ["node", "npx @google/design.md"]
     },
     "popular-web-designs": {
@@ -64,7 +169,7 @@
     },
     "excalidraw": {
       "category": "diagrams",
-      "description": "Hand-drawn .excalidraw JSON files (arch, flow, sequence, concept maps).",
+      "description": "Hand-drawn .excalidraw JSON files (architecture, flow, sequence, concept maps).",
       "external_deps": ["cryptography-pip-optional"]
     },
     "baoyu-infographic": {
@@ -75,7 +180,7 @@
     "ascii-video": {
       "category": "video",
       "description": "Colored ASCII MP4/GIF (video-to-ASCII, audio-reactive, generative, hybrid, TTS).",
-      "external_deps": ["python", "numpy", "scipy", "pillow", "ffmpeg", "opencv-optional"]
+      "external_deps": ["python", "numpy", "scipy", "pillow", "ffmpeg"]
     },
     "manim-video": {
       "category": "video",
@@ -94,7 +199,7 @@
     },
     "pretext": {
       "category": "creative-coding",
-      "description": "Text-flow / reflow / kinetic typography demos with @chenglou/pretext.",
+      "description": "Text-flow, reflow, and kinetic typography demos with @chenglou/pretext.",
       "external_deps": ["pretext-esm-cdn"]
     },
     "ascii-art": {
@@ -104,18 +209,273 @@
     },
     "comfyui": {
       "category": "creative-coding",
-      "description": "ComfyUI image generation control and node pipeline authoring.",
+      "description": "ComfyUI image, video, and audio generation: install, manage nodes/models, run workflows.",
       "external_deps": ["comfyui-server", "gpu", "comfy-cli"]
     },
     "humanizer": {
-      "category": "writing-music",
+      "category": "writing",
       "description": "Rewrites text to strip 29 AI-writing patterns and add genuine voice.",
       "external_deps": []
     },
     "songwriting-and-ai-music": {
-      "category": "writing-music",
+      "category": "writing",
       "description": "Suno custom-mode packages (style description + metatagged lyrics) for original songs or parodies.",
       "external_deps": ["suno-ai"]
+    },
+    "test-driven-development": {
+      "category": "engineering",
+      "description": "Enforce RED-GREEN-REFACTOR TDD: write failing tests first, then make them pass.",
+      "external_deps": []
+    },
+    "systematic-debugging": {
+      "category": "engineering",
+      "description": "4-phase root-cause debugging methodology: understand the bug before fixing it.",
+      "external_deps": []
+    },
+    "simplify-code": {
+      "category": "engineering",
+      "description": "Parallel 3-agent cleanup of recent code changes for clarity and simplicity.",
+      "external_deps": []
+    },
+    "plan": {
+      "category": "engineering",
+      "description": "Plan mode: write an actionable markdown plan to .hermes/plans/ with bite-sized tasks. No execution.",
+      "external_deps": []
+    },
+    "spike": {
+      "category": "engineering",
+      "description": "Throwaway experiments to validate an idea before committing to a build.",
+      "external_deps": []
+    },
+    "requesting-code-review": {
+      "category": "engineering",
+      "description": "Pre-commit review: security scan, quality gates, auto-fix. Use before pushing or opening a PR.",
+      "external_deps": ["pre-commit"]
+    },
+    "skill-authoring": {
+      "category": "engineering",
+      "description": "Author in-repo SKILL.md files with correct frontmatter, structure, and validator.",
+      "external_deps": []
+    },
+    "node-inspect-debugger": {
+      "category": "engineering",
+      "description": "Debug Node.js via --inspect flag and Chrome DevTools Protocol CLI.",
+      "external_deps": ["node", "chrome-devtools"]
+    },
+    "python-debugpy": {
+      "category": "engineering",
+      "description": "Debug Python: pdb REPL and debugpy remote (DAP) attach.",
+      "external_deps": ["python", "debugpy"]
+    },
+    "jupyter-live-kernel": {
+      "category": "engineering",
+      "description": "Iterative Python via a live Jupyter kernel (hamelnb pattern).",
+      "external_deps": ["python", "jupyter"]
+    },
+    "pr-workflow": {
+      "category": "github",
+      "description": "Full GitHub PR lifecycle: branch, commit, open, watch CI, merge.",
+      "external_deps": ["gh-cli"]
+    },
+    "code-review": {
+      "category": "github",
+      "description": "Review PRs: diffs, inline comments via gh CLI or REST API.",
+      "external_deps": ["gh-cli"]
+    },
+    "issues": {
+      "category": "github",
+      "description": "Create, triage, label, and assign GitHub issues via gh CLI or REST API.",
+      "external_deps": ["gh-cli"]
+    },
+    "auth": {
+      "category": "github",
+      "description": "GitHub auth setup: HTTPS tokens, SSH keys, gh CLI login.",
+      "external_deps": []
+    },
+    "repo-management": {
+      "category": "github",
+      "description": "Clone, create, and fork repos. Manage remotes and releases.",
+      "external_deps": ["gh-cli"]
+    },
+    "codebase-inspection": {
+      "category": "github",
+      "description": "Inspect codebases: LOC, language ratios, complexity via pygount.",
+      "external_deps": ["pygount"]
+    },
+    "opencode": {
+      "category": "agents",
+      "description": "Delegate coding tasks to the OpenCode CLI (features, PR review, code generation).",
+      "external_deps": ["opencode-cli"]
+    },
+    "claude-code": {
+      "category": "agents",
+      "description": "Delegate coding to the Claude Code CLI (features, PRs, refactors).",
+      "external_deps": ["claude-code-cli"]
+    },
+    "codex": {
+      "category": "agents",
+      "description": "Delegate coding to the OpenAI Codex CLI (features, PRs, refactors).",
+      "external_deps": ["codex-cli"]
+    },
+    "hermes-agent": {
+      "category": "agents",
+      "description": "Configure, extend, or contribute to Hermes Agent itself.",
+      "external_deps": ["hermes-cli"]
+    },
+    "kanban-orchestrator": {
+      "category": "agents",
+      "description": "Decomposition playbook and anti-temptation rules for an orchestrator routing work through Hermes Kanban.",
+      "external_deps": ["hermes-cli"]
+    },
+    "kanban-worker": {
+      "category": "agents",
+      "description": "Pitfalls, examples, and edge cases for Hermes Kanban workers executing individual tasks.",
+      "external_deps": ["hermes-cli"]
+    },
+    "arxiv": {
+      "category": "research",
+      "description": "Search arXiv papers by keyword, author, category, or paper ID.",
+      "external_deps": []
+    },
+    "llm-wiki": {
+      "category": "research",
+      "description": "Karpathy-style LLM Wiki: build and query an interlinked markdown knowledge base.",
+      "external_deps": []
+    },
+    "blogwatcher": {
+      "category": "research",
+      "description": "Monitor blogs and RSS/Atom feeds for new posts via blogwatcher-cli.",
+      "external_deps": ["blogwatcher-cli"]
+    },
+    "polymarket": {
+      "category": "research",
+      "description": "Query Polymarket: markets, prices, orderbooks, trade history.",
+      "external_deps": []
+    },
+    "research-paper-writing": {
+      "category": "research",
+      "description": "Write ML papers for NeurIPS/ICML/ICLR: design, experiments, submission.",
+      "external_deps": []
+    },
+    "nano-pdf": {
+      "category": "documents",
+      "description": "Edit PDF text, typos, and titles via the nano-pdf CLI with natural-language prompts.",
+      "external_deps": ["nano-pdf-cli"]
+    },
+    "ocr-and-documents": {
+      "category": "documents",
+      "description": "Extract text from PDFs and scans using pymupdf and marker-pdf.",
+      "external_deps": ["pymupdf", "marker-pdf"]
+    },
+    "youtube-content": {
+      "category": "documents",
+      "description": "Pull YouTube transcripts and turn them into summaries, threads, or blog posts.",
+      "external_deps": []
+    },
+    "maps": {
+      "category": "documents",
+      "description": "Geocode, find POIs, compute routes, and look up timezones via OpenStreetMap and OSRM.",
+      "external_deps": []
+    },
+    "notion": {
+      "category": "productivity",
+      "description": "Notion API and ntn CLI: pages, databases, markdown, Workers.",
+      "external_deps": ["ntn-cli"]
+    },
+    "airtable": {
+      "category": "productivity",
+      "description": "Airtable REST API via curl. Record CRUD, filters, upserts.",
+      "external_deps": []
+    },
+    "google-workspace": {
+      "category": "productivity",
+      "description": "Gmail, Calendar, Drive, Docs, Sheets via the gws CLI or Python.",
+      "external_deps": ["gws-cli"]
+    },
+    "powerpoint": {
+      "category": "productivity",
+      "description": "Create, read, and edit .pptx decks, slides, notes, and templates.",
+      "external_deps": ["python-pptx"]
+    },
+    "obsidian": {
+      "category": "productivity",
+      "description": "Read, search, create, and edit notes in an Obsidian vault.",
+      "external_deps": []
+    },
+    "himalaya": {
+      "category": "productivity",
+      "description": "Himalaya CLI: read and send IMAP/SMTP email from the terminal.",
+      "external_deps": ["himalaya-cli"]
+    },
+    "teams-pipeline": {
+      "category": "productivity",
+      "description": "Operate the Teams meeting-summary pipeline via Hermes CLI: summarize meetings, inspect status.",
+      "external_deps": ["hermes-cli", "teams"]
+    },
+    "huggingface-hub": {
+      "category": "data",
+      "description": "HuggingFace hf CLI: search, download, and upload models and datasets.",
+      "external_deps": ["hf-cli"]
+    },
+    "fastmcp": {
+      "category": "data",
+      "description": "Build, test, inspect, install, and deploy MCP servers in Python with FastMCP.",
+      "external_deps": ["python", "fastmcp"]
+    },
+    "mcporter": {
+      "category": "data",
+      "description": "Use the mcporter CLI to list, configure, auth, and call MCP servers and tools directly (HTTP or stdio).",
+      "external_deps": ["mcporter-cli"]
+    },
+    "evm": {
+      "category": "crypto",
+      "description": "Read-only EVM client: wallets, tokens, and gas across 8 chains.",
+      "external_deps": ["evm-cli"]
+    },
+    "solana": {
+      "category": "crypto",
+      "description": "Query Solana blockchain data with USD pricing: wallet balances, token portfolios, transactions.",
+      "external_deps": ["solana-cli"]
+    },
+    "hyperliquid": {
+      "category": "crypto",
+      "description": "Hyperliquid market data, account history, and trade review.",
+      "external_deps": []
+    },
+    "apple-notes": {
+      "category": "platform",
+      "description": "Manage Apple Notes via the memo CLI: create, search, and edit notes (macOS only).",
+      "external_deps": ["memo-cli", "macos"]
+    },
+    "apple-reminders": {
+      "category": "platform",
+      "description": "Apple Reminders via remindctl: add, list, and complete reminders (macOS only).",
+      "external_deps": ["remindctl", "macos"]
+    },
+    "findmy": {
+      "category": "platform",
+      "description": "Track Apple devices and AirTags via FindMy.app (macOS only).",
+      "external_deps": ["macos"]
+    },
+    "imessage": {
+      "category": "platform",
+      "description": "Send and receive iMessages and SMS via the imsg CLI (macOS only).",
+      "external_deps": ["imsg-cli", "macos"]
+    },
+    "macos-computer-use": {
+      "category": "platform",
+      "description": "Drive the macOS desktop in the background: screenshots, mouse, keyboard, scroll, drag. Doesn't steal focus.",
+      "external_deps": ["computer_use-tool", "macos"]
+    },
+    "openhue": {
+      "category": "platform",
+      "description": "Control Philips Hue lights, scenes, and rooms via the OpenHue CLI.",
+      "external_deps": ["openhue-cli"]
+    },
+    "xurl": {
+      "category": "platform",
+      "description": "X/Twitter via the xurl CLI: post, search, DM, media, v2 API.",
+      "external_deps": ["xurl-cli"]
     }
   }
 }
