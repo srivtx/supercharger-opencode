@@ -1,59 +1,74 @@
 # supercharger-opencode
 
-> A curated bundle of **68 production-grade skills** across **14 categories** for [opencode](https://opencode.ai). One curl command to install. No npm, no auth, no version churn.
+> **68 production-grade skills** across **14 categories**, bundled into **9 curated presets** for [opencode](https://opencode.ai). One curl command. No npm, no auth, no version churn.
 
 ![Skills](https://img.shields.io/badge/skills-68-purple)
-![Categories](https://img.shields.io/badge/categories-14-blue)
+![Presets](https://img.shields.io/badge/presets-9-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
-![Installs](https://img.shields.io/badge/installs-curl--only-orange)
-
----
-
-## Why
-
-opencode's skill loader reads `SKILL.md` files from a small set of well-known locations. The hard part isn't installing — it's **finding skills worth installing**.
-
-`supercharger-opencode` is a hand-picked bundle of 68 skills ported from the [Hermes Agent](https://github.com/just-every/hermes-agent) `creative/`, `engineering/`, `github/`, `research/`, and other collections, re-shelved for opencode and organized by **what a user is trying to do**, not by source-of-origin.
-
-No npm registry. No version bumps. No 2FA prompts. The repo IS the package.
+![Install](https://img.shields.io/badge/install-curl--only-orange)
 
 ---
 
 ## Quick start
 
+The most popular entry point — the **design preset** — installs the full design category in one command:
+
 ```bash
-curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/install.sh | bash -s -- add claude-design
+curl -fsSL https://cdn.jsdelivr.net/gh/srivtx/supercharger-opencode@main/install.sh | bash -s -- add design
 ```
 
 Restart opencode. Done.
 
-Install a whole category at once:
-
-```bash
-curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/install.sh | bash -s -- add engineering
-```
+> **Why jsDelivr?** GitHub's `raw.githubusercontent.com` CDN is known to cache the previous main-branch version for 5–30+ minutes after a push. jsDelivr mirrors the same repo with a faster global CDN and more aggressive cache invalidation, so you always get the latest version immediately.
 
 ---
 
-## Starter combo
+## Presets
 
-New to opencode? Run these three commands and you have the essentials:
+Don't know where to start? Pick a preset. Each one is a curated mix of skills organized by **what you're trying to do** — not by source category.
+
+| Preset | Skills | What it's for |
+|---|---|---|
+| `minimal` | 5 | The 5 essentials: TDD, debugging, planning, claude-design, pr-workflow. |
+| `design` | 5 | The full design category. HTML artifacts, token specs, brand templates, mockups. |
+| **`visual`** | **10** | **Design + diagrams + creative coding. The most popular preset.** |
+| `creative` | 17 | Every creative skill. Design, video, music, art. |
+| `frontend` | 19 | Visual + the dev workflow. For people who build UIs for a living. |
+| `devops` | 14 | GitHub, MCP, debugging, multi-agent orchestration. |
+| `researcher` | 10 | arXiv, wikis, blogs, papers, OCR. |
+| `ml` | 12 | HuggingFace, Jupyter, arXiv, Python debugging. |
+| `pm` | 12 | Documents, Notion, PowerPoint, Obsidian, OCR. |
 
 ```bash
-# 1) day-to-day engineering: TDD, debugging, code review
-curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/install.sh | bash -s -- add engineering
+# Browse all presets with details
+curl -fsSL https://cdn.jsdelivr.net/gh/srivtx/supercharger-opencode@main/install.sh | bash -s -- presets
 
-# 2) GitHub workflow: PRs, code review, issues
-curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/install.sh | bash -s -- add github
+# See what's in one preset
+curl -fsSL .../install.sh | bash -s -- info visual
 
-# 3) visual polish when you need it
-curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/install.sh | bash -s -- add design diagrams
+# Install it
+curl -fsSL .../install.sh | bash -s -- add visual
 ```
 
-That's 28 skills loaded with three commands. Browse the rest:
+### Recommended ladders
 
+**For designers:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/install.sh | bash -s -- list
+add design    # start here
+add visual    # when you need diagrams + creative coding
+add creative  # when you want everything
+```
+
+**For developers:**
+```bash
+add minimal     # the bare essentials
+add frontend    # add design + dev workflow
+add devops      # when you start doing infra
+```
+
+**For researchers / PMs / ML engineers:**
+```bash
+add researcher   # or `ml`, or `pm`
 ```
 
 ---
@@ -62,16 +77,16 @@ curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/i
 
 | Command | What it does |
 |---|---|
-| `add <skill> [...]` | Install one or more skills |
-| `add <category>` | Install every skill in a category |
+| `add <skill \| category \| preset> [...]` | Install skills, categories, or presets |
 | `remove <skill> [...]` | Uninstall one or more skills |
 | `remove --all` | Uninstall every supercharger-installed skill |
-| `list` | Show all available skills with install status |
-| `list-categories` | Show category summary |
-| `info <skill>` | Show description and dependencies for one skill |
+| `list` | Show all 68 skills with install status |
+| `list-categories` | Show the 14 categories |
+| `presets` | Show the 9 curated preset bundles |
+| `info <skill \| category \| preset>` | Show details for one target |
 | `help` | Show usage |
 
-All commands work the same whether invoked locally (after `git clone`) or piped from curl.
+`add` resolves in order: **preset → skill → category**. Most specific match wins.
 
 ### Environment variables
 
@@ -90,9 +105,11 @@ All commands work the same whether invoked locally (after `git clone`) or piped 
 
 ---
 
-## Skills
+## Skills (the full 68)
 
-### design — Web & Product Design (5)
+If you want the raw list instead of a preset:
+
+### design (5) — start here if you make UIs
 
 | Skill | Description | External deps |
 |---|---|---|
@@ -102,148 +119,148 @@ All commands work the same whether invoked locally (after `git clone`) or piped 
 | `sketch` | 2–3 disposable single-file HTML mockup variants for side-by-side comparison. | browser, Tailwind (optional) |
 | `visual-iteration-loop` | Meta-skill for navigating multi-turn design iteration (Fix-vs-Look mode). | none |
 
-### diagrams — Diagrams & Infographics (3)
+### diagrams (3)
 
 | Skill | Description | External deps |
 |---|---|---|
-| `architecture-diagram` | Dark-themed inline-SVG cloud / infra architecture diagrams as a single self-contained HTML file. | JetBrains Mono |
-| `excalidraw` | Hand-drawn `.excalidraw` JSON files (arch, flow, sequence, concept maps). | `cryptography` (optional upload) |
+| `architecture-diagram` | Dark-themed inline-SVG cloud / infra architecture diagrams. | JetBrains Mono |
+| `excalidraw` | Hand-drawn `.excalidraw` JSON files. | `cryptography` (optional upload) |
 | `baoyu-infographic` | `infographic.png` from any of 21 layouts × 21 styles. | `image_generate` tool |
 
-### video — Video & Animation (3)
+### video (3)
 
 | Skill | Description | External deps |
 |---|---|---|
-| `ascii-video` | Colored ASCII MP4 / GIF (video-to-ASCII, audio-reactive, generative, hybrid, TTS). | Python, NumPy, SciPy, Pillow, ffmpeg |
-| `manim-video` | 3Blue1Brown-style Manim CE explainer videos with optional voiceover. | Manim CE, LaTeX, ffmpeg |
-| `touchdesigner-mcp` | Drive a running TouchDesigner instance via the twozero MCP. | TouchDesigner, twozero.tox |
+| `ascii-video` | Colored ASCII MP4 / GIF. | Python, NumPy, SciPy, Pillow, ffmpeg |
+| `manim-video` | 3Blue1Brown-style Manim CE explainer videos. | Manim CE, LaTeX, ffmpeg |
+| `touchdesigner-mcp` | Drive a running TouchDesigner instance via MCP. | TouchDesigner, twozero.tox |
 
-### creative-coding — Creative Coding (4)
-
-| Skill | Description | External deps |
-|---|---|---|
-| `p5js` | Single-file HTML p5.js sketches (gen art, shaders, interactive, 3D, audio-reactive). | p5.js CDN |
-| `pretext` | Text-flow, reflow, and kinetic typography demos with `@chenglou/pretext`. | pretext (esm.sh CDN) |
-| `ascii-art` | Terminal ASCII art (pyfiglet, cowsay, boxes, toilet, image-to-ASCII, QR, weather). | pyfiglet, cowsay, boxes, toilet |
-| `comfyui` | ComfyUI image, video, and audio generation: install, manage nodes/models, run workflows. | ComfyUI server, GPU, comfy-cli |
-
-### writing — Writing & Music (2)
+### creative-coding (4)
 
 | Skill | Description | External deps |
 |---|---|---|
-| `humanizer` | Rewrites text to strip 29 AI-writing patterns and inject genuine voice. | none |
-| `songwriting-and-ai-music` | Suno custom-mode packages (style description + metatagged lyrics). | Suno AI |
+| `p5js` | Single-file HTML p5.js sketches. | p5.js CDN |
+| `pretext` | Text-flow and kinetic typography demos. | pretext (esm.sh CDN) |
+| `ascii-art` | Terminal ASCII art. | pyfiglet, cowsay, boxes, toilet |
+| `comfyui` | ComfyUI image / video / audio generation. | ComfyUI server, GPU |
 
-### engineering — Day-to-day dev workflow (10)
+### writing (2)
 
 | Skill | Description | External deps |
 |---|---|---|
-| `test-driven-development` | Enforce RED-GREEN-REFACTOR TDD: write failing tests first, then make them pass. | none |
-| `systematic-debugging` | 4-phase root-cause debugging methodology: understand the bug before fixing it. | none |
-| `simplify-code` | Parallel 3-agent cleanup of recent code changes for clarity and simplicity. | none |
-| `plan` | Plan mode: write an actionable markdown plan with bite-sized tasks. No execution. | none |
-| `spike` | Throwaway experiments to validate an idea before committing to a build. | none |
-| `requesting-code-review` | Pre-commit review: security scan, quality gates, auto-fix. | pre-commit |
-| `skill-authoring` | Author in-repo SKILL.md files with correct frontmatter, structure, and validator. | none |
-| `node-inspect-debugger` | Debug Node.js via `--inspect` and Chrome DevTools Protocol CLI. | Node, Chrome DevTools |
-| `python-debugpy` | Debug Python: pdb REPL and debugpy remote (DAP) attach. | Python, debugpy |
+| `humanizer` | Rewrites text to strip 29 AI-writing patterns. | none |
+| `songwriting-and-ai-music` | Suno custom-mode packages. | Suno AI |
+
+### engineering (10) — the dev workflow
+
+| Skill | Description | External deps |
+|---|---|---|
+| `test-driven-development` | RED-GREEN-REFACTOR TDD. | none |
+| `systematic-debugging` | 4-phase root-cause debugging. | none |
+| `simplify-code` | Parallel 3-agent cleanup of recent changes. | none |
+| `plan` | Plan mode: write an actionable markdown plan. | none |
+| `spike` | Throwaway experiments. | none |
+| `requesting-code-review` | Pre-commit review: security, quality, auto-fix. | pre-commit |
+| `skill-authoring` | Author in-repo SKILL.md files. | none |
+| `node-inspect-debugger` | Debug Node.js via `--inspect` + Chrome DevTools. | Node, Chrome DevTools |
+| `python-debugpy` | Debug Python: pdb REPL + debugpy remote. | Python, debugpy |
 | `jupyter-live-kernel` | Iterative Python via a live Jupyter kernel. | Python, Jupyter |
 
-### github — GitHub workflow (6)
+### github (6)
 
 | Skill | Description | External deps |
 |---|---|---|
-| `pr-workflow` | Full PR lifecycle: branch, commit, open, watch CI, merge. | `gh` CLI |
-| `code-review` | Review PRs: diffs, inline comments via `gh` or REST. | `gh` CLI |
-| `issues` | Create, triage, label, and assign issues via `gh` or REST. | `gh` CLI |
-| `auth` | GitHub auth setup: HTTPS tokens, SSH keys, `gh` CLI login. | none |
-| `repo-management` | Clone, create, fork repos. Manage remotes and releases. | `gh` CLI |
-| `codebase-inspection` | Inspect codebases: LOC, language ratios, complexity via pygount. | pygount |
+| `pr-workflow` | Full PR lifecycle: branch, commit, open, CI, merge. | `gh` CLI |
+| `code-review` | Review PRs: diffs, inline comments. | `gh` CLI |
+| `issues` | Create, triage, label, assign issues. | `gh` CLI |
+| `auth` | GitHub auth setup. | none |
+| `repo-management` | Clone, create, fork repos. | `gh` CLI |
+| `codebase-inspection` | LOC, language ratios, complexity via pygount. | pygount |
 
-### agents — Multi-agent orchestration (6)
-
-| Skill | Description | External deps |
-|---|---|---|
-| `opencode` | Delegate coding tasks to the OpenCode CLI. | opencode CLI |
-| `claude-code` | Delegate coding to the Claude Code CLI. | claude-code CLI |
-| `codex` | Delegate coding to the OpenAI Codex CLI. | codex CLI |
-| `hermes-agent` | Configure, extend, or contribute to Hermes Agent itself. | hermes CLI |
-| `kanban-orchestrator` | Decomposition playbook for an orchestrator routing work through Hermes Kanban. | hermes CLI |
-| `kanban-worker` | Pitfalls and examples for Hermes Kanban workers executing individual tasks. | hermes CLI |
-
-### research — Research & learning (5)
+### agents (6)
 
 | Skill | Description | External deps |
 |---|---|---|
-| `arxiv` | Search arXiv papers by keyword, author, category, or paper ID. | none |
-| `llm-wiki` | Karpathy-style LLM Wiki: build and query an interlinked markdown knowledge base. | none |
-| `blogwatcher` | Monitor blogs and RSS/Atom feeds for new posts. | blogwatcher CLI |
-| `polymarket` | Query Polymarket: markets, prices, orderbooks, trade history. | none |
-| `research-paper-writing` | Write ML papers for NeurIPS / ICML / ICLR: design, experiments, submission. | none |
+| `opencode` | Delegate to the OpenCode CLI. | opencode CLI |
+| `claude-code` | Delegate to the Claude Code CLI. | claude-code CLI |
+| `codex` | Delegate to the OpenAI Codex CLI. | codex CLI |
+| `hermes-agent` | Configure Hermes Agent. | hermes CLI |
+| `kanban-orchestrator` | Decomposition playbook for an orchestrator. | hermes CLI |
+| `kanban-worker` | Pitfalls for Kanban workers. | hermes CLI |
 
-### documents — Documents & Media (4)
-
-| Skill | Description | External deps |
-|---|---|---|
-| `nano-pdf` | Edit PDF text, typos, and titles via natural-language prompts. | nano-pdf CLI |
-| `ocr-and-documents` | Extract text from PDFs and scans using pymupdf and marker-pdf. | pymupdf, marker-pdf |
-| `youtube-content` | Pull YouTube transcripts and turn them into summaries, threads, or blog posts. | none |
-| `maps` | Geocode, POIs, routes, timezones via OpenStreetMap and OSRM. | none |
-
-### productivity — Productivity integrations (7)
+### research (5)
 
 | Skill | Description | External deps |
 |---|---|---|
-| `notion` | Notion API and ntn CLI: pages, databases, markdown, Workers. | ntn CLI |
-| `airtable` | Airtable REST API via curl: records CRUD, filters, upserts. | none |
-| `google-workspace` | Gmail, Calendar, Drive, Docs, Sheets via the gws CLI. | gws CLI |
-| `powerpoint` | Create, read, and edit `.pptx` decks. | python-pptx |
-| `obsidian` | Read, search, create, and edit notes in an Obsidian vault. | none |
-| `himalaya` | Himalaya CLI: read and send IMAP/SMTP email from the terminal. | himalaya CLI |
-| `teams-pipeline` | Operate the Teams meeting-summary pipeline via Hermes CLI. | hermes CLI, Teams |
+| `arxiv` | Search arXiv papers. | none |
+| `llm-wiki` | Karpathy-style interlinked markdown wiki. | none |
+| `blogwatcher` | Monitor blogs and RSS/Atom feeds. | blogwatcher CLI |
+| `polymarket` | Query Polymarket: markets, prices, orderbooks. | none |
+| `research-paper-writing` | ML paper drafting for NeurIPS / ICML / ICLR. | none |
 
-### data — Data & ML (3)
+### documents (4)
 
 | Skill | Description | External deps |
 |---|---|---|
-| `huggingface-hub` | HuggingFace hf CLI: search, download, and upload models and datasets. | hf CLI |
-| `fastmcp` | Build, test, inspect, install, and deploy MCP servers in Python. | Python, fastmcp |
-| `mcporter` | Use the mcporter CLI to list, configure, auth, and call MCP servers and tools. | mcporter CLI |
+| `nano-pdf` | Edit PDFs via natural language. | nano-pdf CLI |
+| `ocr-and-documents` | Extract text from PDFs / scans. | pymupdf, marker-pdf |
+| `youtube-content` | Pull YouTube transcripts. | none |
+| `maps` | Geocode, POIs, routes, timezones. | none |
 
-### crypto — Crypto (3)
-
-| Skill | Description | External deps |
-|---|---|---|
-| `evm` | Read-only EVM client: wallets, tokens, gas across 8 chains. | evm CLI |
-| `solana` | Query Solana blockchain data with USD pricing. | solana CLI |
-| `hyperliquid` | Hyperliquid market data, account history, trade review. | none |
-
-### platform — Platform-locked (7)
+### productivity (7)
 
 | Skill | Description | External deps |
 |---|---|---|
-| `apple-notes` | Manage Apple Notes via the memo CLI (macOS only). | memo CLI, macOS |
-| `apple-reminders` | Apple Reminders via remindctl (macOS only). | remindctl, macOS |
-| `findmy` | Track Apple devices and AirTags via FindMy.app (macOS only). | macOS |
-| `imessage` | Send and receive iMessages / SMS via the imsg CLI (macOS only). | imsg CLI, macOS |
-| `macos-computer-use` | Drive the macOS desktop in the background: screenshots, mouse, keyboard. | `computer_use` tool, macOS |
-| `openhue` | Control Philips Hue lights, scenes, and rooms. | OpenHue CLI |
-| `xurl` | X / Twitter via the xurl CLI: post, search, DM, media. | xurl CLI |
+| `notion` | Notion API and ntn CLI. | ntn CLI |
+| `airtable` | Airtable REST API. | none |
+| `google-workspace` | Gmail, Calendar, Drive, Docs, Sheets. | gws CLI |
+| `powerpoint` | Create, read, edit `.pptx` decks. | python-pptx |
+| `obsidian` | Read, search, edit Obsidian vault notes. | none |
+| `himalaya` | IMAP/SMTP email from the terminal. | himalaya CLI |
+| `teams-pipeline` | Teams meeting-summary pipeline. | hermes CLI, Teams |
+
+### data (3)
+
+| Skill | Description | External deps |
+|---|---|---|
+| `huggingface-hub` | HuggingFace hf CLI. | hf CLI |
+| `fastmcp` | Build MCP servers in Python. | Python, fastmcp |
+| `mcporter` | Call MCP servers and tools. | mcporter CLI |
+
+### crypto (3)
+
+| Skill | Description | External deps |
+|---|---|---|
+| `evm` | Read-only EVM client across 8 chains. | evm CLI |
+| `solana` | Query Solana blockchain data. | solana CLI |
+| `hyperliquid` | Hyperliquid market data. | none |
+
+### platform (7) — OS- or device-locked
+
+| Skill | Description | External deps |
+|---|---|---|
+| `apple-notes` | Apple Notes via memo CLI. | memo CLI, macOS |
+| `apple-reminders` | Apple Reminders via remindctl. | remindctl, macOS |
+| `findmy` | Track Apple devices and AirTags. | macOS |
+| `imessage` | iMessage / SMS via imsg CLI. | imsg CLI, macOS |
+| `macos-computer-use` | Drive the macOS desktop in the background. | `computer_use` tool, macOS |
+| `openhue` | Philips Hue lights. | OpenHue CLI |
+| `xurl` | X / Twitter CLI. | xurl CLI |
 
 ---
 
 ## How it works
 
-The installer is a single self-contained bash script. When you run `add <skill>`, it:
+The installer is a single self-contained bash script. When you run `add <target>`, it:
 
-1. Fetches `manifest.json` from the repo.
-2. Looks up the skill's category.
-3. Downloads the repo tarball (≈ 2–3 MB, gzipped) from `codeload.github.com`.
-4. Extracts only the requested skill folder.
-5. Copies it to `$SUPERCHARGER_INSTALL_DIR/<skill>/`.
+1. Fetches `manifest.json` from the repo via jsDelivr.
+2. Resolves `<target>` against presets, then skills, then categories.
+3. Downloads the repo tarball once (≈ 2–3 MB, gzipped) from `codeload.github.com`.
+4. Extracts every requested skill from the cached tarball.
+5. Copies them to `$SUPERCHARGER_INSTALL_DIR/<skill>/`.
 6. Cleans up.
 
-No git clone, no npm install, no `node_modules`. Just curl and tar.
+No git clone, no npm install, no `node_modules`. One download per `add` call regardless of how many skills you install.
 
 ---
 
@@ -252,7 +269,7 @@ No git clone, no npm install, no `node_modules`. Just curl and tar.
 ```
 .
 ├── install.sh                 # the installer
-├── manifest.json              # canonical skill catalog
+├── manifest.json              # canonical skill + preset catalog
 ├── README.md
 ├── design/                    # 5 skills
 ├── diagrams/                  # 3 skills
@@ -270,28 +287,17 @@ No git clone, no npm install, no `node_modules`. Just curl and tar.
 └── platform/                  # 7 skills
 ```
 
-Each skill is a self-contained directory:
-
-```
-<category>/<skill>/
-├── SKILL.md                   # required
-├── LICENSE                    # usually MIT
-├── references/                # optional
-├── templates/                 # optional
-└── scripts/                   # optional
-```
-
 ---
 
 ## Updating a skill
 
-Skills are pulled from `main` on every install. To refresh an installed skill, remove and re-add it:
+Skills are pulled from `main` on every install. To refresh, remove and re-add:
 
 ```bash
 ./install.sh remove p5js && ./install.sh add p5js
 ```
 
-If you've cloned the repo locally, `git pull` first.
+If you've cloned the repo, `git pull` first.
 
 ---
 
@@ -307,20 +313,30 @@ Each skill retains its original license (see `LICENSE` in each skill directory; 
 
 ---
 
-## Adding a new skill
+## Adding a new skill or preset
 
+**New skill:**
 1. Create `<category>/<skill-name>/SKILL.md` with at minimum:
-
    ```yaml
    ---
    name: my-skill
    description: One sentence covering what the skill does and when to trigger it.
    ---
    ```
-
-2. Add an entry to the top-level `manifest.json` under `categories.<cat>.skills` (and add the category if new) and `skills.<skill-name>`.
-
+2. Add an entry to the top-level `manifest.json` under `categories.<cat>.skills` and `skills.<skill-name>`.
 3. Open a PR.
+
+**New preset:**
+1. Add a `presets.<preset-name>` block to `manifest.json`:
+   ```json
+   "my-preset": {
+     "label": "My Preset",
+     "tagline": "Short hook for the table.",
+     "description": "One paragraph explaining who this is for.",
+     "skills": ["skill-1", "skill-2", "skill-3"]
+   }
+   ```
+2. Open a PR.
 
 ---
 
