@@ -25,6 +25,33 @@ Restart opencode. Done.
 > curl -fsSL https://cdn.jsdelivr.net/gh/srivtx/supercharger-opencode@main/install.sh | bash -s -- add design
 > ```
 
+### Verify the install
+
+After installing, confirm everything's in place:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/srivtx/supercharger-opencode/main/install.sh | bash -s -- verify
+```
+
+Sample output:
+
+```
+install dir: ~/.config/opencode/skill
+
+  10 installed (valid)
+
+preset coverage:
+  design         5 / 5   ✓ complete
+  visual        10 / 10  ✓ complete
+  frontend       8 / 19  ~ partial
+  devops         0 / 14  · not installed
+  ...
+
+all 10 supercharger skill(s) look good. restart opencode to load.
+```
+
+Then restart opencode to pick up the new skills.
+
 ---
 
 ## Presets
@@ -52,6 +79,9 @@ curl -fsSL .../install.sh | bash -s -- info visual
 
 # Install it
 curl -fsSL .../install.sh | bash -s -- add visual
+
+# Confirm the install worked
+curl -fsSL .../install.sh | bash -s -- verify
 ```
 
 ### Recommended ladders
@@ -87,6 +117,7 @@ add researcher   # or `ml`, or `pm`
 | `list` | Show all 68 skills with install status |
 | `list-categories` | Show the 14 categories |
 | `presets` | Show the 9 curated preset bundles |
+| `verify` | Check installed skills are valid + show preset coverage |
 | `info <skill \| category \| preset>` | Show details for one target |
 | `help` | Show usage |
 
